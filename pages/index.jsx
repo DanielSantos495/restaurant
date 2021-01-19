@@ -1,12 +1,15 @@
 import React from 'react';
-import CartUser from '../components/CartUser/CartUser'
+import { CardUserContainer } from '@/components/CardUser/CardUserContainer'
+import { Layout } from '@/components/Layout/Layout'
 
 const HomePage = () => {
+
+   const logoUser = 'https://i.imgur.com/QVzPw2n.png'
+
    return (
-      <>
-         <h1>Restaurant - SUSHI - </h1>
-         <CartUser />
-      </>
+      <Layout logo={logoUser}>
+         <CardUserContainer />
+      </Layout>
    )
 }
 

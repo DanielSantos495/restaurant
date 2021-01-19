@@ -1,6 +1,8 @@
 import React from 'react';
 
-const Product = (props) => {
+import { Container, ProductName, ProductPrice, ProductDescription } from './style'
+
+export const Product = (props) => {
 
    const {
       name,
@@ -8,12 +10,10 @@ const Product = (props) => {
       description
    } = props;
    return (
-      <div>
-         <h3>{name}</h3>
-         <h4>{price}</h4>
-         <p>{description}</p>
-      </div>
+      <Container>
+         <ProductName>{name}</ProductName>
+         <ProductPrice>${price}</ProductPrice>
+         <ProductDescription>{description}</ProductDescription>
+      </Container>
    )
 }
-
-export default Product;
