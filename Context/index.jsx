@@ -10,6 +10,7 @@ const Provider = ({ children }) => {
       return windowNotUndefined && window.sessionStorage.getItem('token')
    })
    const [typeProductSelectionValidate, setTypeProductSelectionValidate] = useState(false)
+   const [manageAction, setAction] = useState('')
 
    // Value del Provider
    const value = {
@@ -22,6 +23,10 @@ const Provider = ({ children }) => {
       choiseType: choise => {
          setTypeProductSelectionValidate(choise)
       },
+      manageAction,
+      setManageAction: action => {
+         setAction(action)
+      }
    }
 
    return (

@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Product } from '@/components/Product/Product'
 import { Manage } from '@/components/Manage/Manage'
-import { Modal } from '@/components/Modal/Modal'
+import { ConfirmationDelete } from './ConfirmationDelete'
 
-import { Section, Article, BebidasContainer, ContainerTitle, Button  } from './style'
+import { Context } from '../../Context'
+import { Section, Article, BebidasContainer, ContainerTitle, ButtonIcon  } from './style'
+
 export const CardAdmin = (props) => {
 
-   const { products } = props;
+   const {
+      confirmationDelete,
+      setConfirmationDelete,
+      products,
+      handleButtonIcon,
+      handleSubmitDelete
+   } = props;
+   const iconEdit = '/icons/edit.png'
+   const iconDelete = '/icons/delete.png'
+   const { manageAction } = useContext(Context)
+   const editProduct = manageAction === 'EDITAR'
+   const deleteProduct = manageAction === 'ELIMINAR'
 
    return(
       <Section>
@@ -20,6 +33,15 @@ export const CardAdmin = (props) => {
                   products.map((item, i) =>
                      item.type === 'sushi' &&
                      <li key={i}>
+                     {editProduct || deleteProduct ?
+                        <ButtonIcon type='button' onClick={e => handleButtonIcon(item._id)}>
+                           <img
+                              src={editProduct && iconEdit || deleteProduct && iconDelete}
+                              alt={editProduct && 'Editar' || deleteProduct && 'Eliminar'}
+                           />
+                        </ButtonIcon>
+                        : null
+                     }
                         <Product {...item}/>
                      </li>
                   )
@@ -36,6 +58,12 @@ export const CardAdmin = (props) => {
                      products.map((item, i) =>
                         item.type === 'bebidas' &&
                         <li key={i}>
+                        {editProduct || deleteProduct ?
+                           <ButtonIcon type='button' onClick={e => handleButtonIcon(item._id)}>
+                              <img src={editProduct && iconEdit || deleteProduct && iconDelete} />
+                           </ButtonIcon>
+                           : null
+                        }
                            <Product {...item}/>
                         </li>
                      )
@@ -51,6 +79,12 @@ export const CardAdmin = (props) => {
                      products.map((item, i) =>
                         item.type === 'postres' &&
                         <li key={i}>
+                        {editProduct || deleteProduct ?
+                           <ButtonIcon type='button' onClick={e => handleButtonIcon(item._id)}>
+                              <img src={editProduct && iconEdit || deleteProduct && iconDelete} />
+                           </ButtonIcon>
+                           : null
+                        }
                            <Product {...item}/>
                         </li>
                      )
@@ -59,6 +93,12 @@ export const CardAdmin = (props) => {
             </div>
          </Article>
          <Manage />
+         {confirmationDelete &&
+            <ConfirmationDelete
+               setConfirmationDelete={setConfirmationDelete}
+               handleSubmit={handleSubmitDelete}
+            />
+         }
       </Section>
    )
 }

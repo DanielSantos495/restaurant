@@ -7,8 +7,8 @@ export const productsCenter = `
    align-items: center;
 `
 
-export const buttons = (fontsize, height, width) => `
-   background-color: ${colorPrimary};
+export const buttons = (fontsize, height, width, background = colorPrimary) => `
+   background-color: ${background};
    border: none;
    border-radius: 2px;
    color: #fff;

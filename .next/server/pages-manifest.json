@@ -2,6 +2,7 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
-  "/admin/manage/add": "pages/admin/manage/add.js"
+  "/admin/manage": "pages/admin/manage.js",
+  "/admin/manage/add": "pages/admin/manage/add.js",
+  "/": "pages/index.js"
 }
