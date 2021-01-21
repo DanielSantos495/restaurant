@@ -12,7 +12,7 @@ export const Product = (props) => {
    return (
       <Container>
          <ProductName>{name}</ProductName>
-         <ProductPrice>${price}</ProductPrice>
+         <ProductPrice>{price.length > 0 ? `$${price}` : ''}</ProductPrice>
          <ProductDescription>{description}</ProductDescription>
       </Container>
    )

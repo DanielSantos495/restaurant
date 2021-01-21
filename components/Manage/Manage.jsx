@@ -1,44 +1,31 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useRouter } from 'next/router'
 
-import { SelectAdd } from './SelectAdd'
 
-import { Article, ContainerTitle, Button  } from './style'
+import { Article, ContainerTitle, Button } from './style'
 // import deleteIcon from 'public/icons/delete.png'
 
 export const Manage = () => {
 
-   const [add, setAdd] = useState(false)
-
+   const router = useRouter()
    const handleButton = () => {
-      if (add) {
-         setAdd(false)
-      } else {
-         setAdd(true)
-      }
+      router.push('/admin/manage/add')
    }
 
    return(
       <Article>
-         {add
-            ? <Button type='button' onClick={handleButton}> ATRAS </Button>
-            : <ContainerTitle>
-               <h2>MANEJADOR</h2>
-               </ContainerTitle>
-         }
-         {add
-            ? <SelectAdd />
-            : <>
-                  <Button type='button' onClick={handleButton}>
-                     AGREGAR
-                  </Button>
-                  <Button type='button'>
-                     EDITAR
-                  </Button>
-                  <Button type='button'>
-                     ELIMINAR
-                  </Button>
-               </>
-         }
+         <ContainerTitle>
+         <h2>MANEJADOR</h2>
+         </ContainerTitle>
+         <Button type='button' onClick={handleButton}>
+            AGREGAR
+         </Button>
+         <Button type='button'>
+            EDITAR
+         </Button>
+         <Button type='button'>
+            ELIMINAR
+         </Button>
       </Article>
    )
 }

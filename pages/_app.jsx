@@ -1,12 +1,15 @@
 import { GlobalStyle } from '../styles/GlobalStyle'
 
-const MyApp = ({ Component, pagesProps }) => {
+import { Context } from '../Context'
 
+const MyApp = ({ Component, pagesProps }) => {
 
    return (
       <>
          <GlobalStyle />
+         <Context.Provider>
             <Component {...pagesProps} />
+         </Context.Provider>
       </>
    )
 }

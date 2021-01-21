@@ -2,13 +2,11 @@ import styled from 'styled-components'
 import {
    fontFamilyCursive,
    fontSizeBig,
-   fontSizeContent,
    fontFamiliyContent,
    fontSizeMiddle,
    fontSizeSmall,
-   colorPrimary
 } from '../../styles/variables'
-import { buttons } from '../../styles/mixins'
+import { buttons, input } from '../../styles/mixins'
 
 export const Form = styled.form`
    align-items: center;
@@ -35,13 +33,7 @@ export const ContainerInputs = styled.div`
    width: 100%;
 `
 export const Input = styled.input`
-   border: none;
-   border-bottom: 1px solid grey;
-   height: 20px;
-   width: 230px;
-   ::placeholder {
-      font-size: ${fontSizeContent};
-   }
+   ${input('230px')}
 `
 
 export const Button = styled.button`
@@ -53,8 +45,4 @@ export const Alert = styled.p`
    font-family: ${fontFamiliyContent};
    font-size: ${fontSizeSmall};
    margin: 10px 0 0 0;
-`
-
-export const Loader = styled.div`
-
 `

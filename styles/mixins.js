@@ -1,4 +1,5 @@
-import { colorPrimary, fontFamiliyContent, fontSizeTitle } from './variables'
+import styled from 'styled-components'
+import { colorPrimary, fontFamiliyContent, fontSizeTitle, fontSizeSmall, fontSizeContent } from './variables'
 
 export const productsCenter = `
    display: flex;
@@ -41,4 +42,25 @@ export const titles = (height, width) => `
       font-size: ${fontSizeTitle};
       font-weight: 700;
    }
+`
+// Inputs requeridos
+export const Alert = styled.p`
+   color: red;
+   font-family: ${fontFamiliyContent};
+   font-size: ${fontSizeSmall};
+   margin: 10px 0 0 0;
+`
+
+export const input = width => `
+   border: none;
+   border-bottom: 1px solid grey;
+   height: 20px;
+   width: ${width};
+   ::placeholder {
+      font-size: ${fontSizeContent};
+   }
+`
+// Pdte por crear Loader para formularios
+export const Loader = styled.div`
+
 `

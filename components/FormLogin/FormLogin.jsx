@@ -1,5 +1,6 @@
 import React from 'react'
-import { Form, H2, Input, Button, ContainerInputs, Alert } from './style';
+import { Form, H2, Input, Button, ContainerInputs } from './style';
+import { Alert, Loader } from '@/styles/mixins'
 
 export const FormLogin = (props) => {
 

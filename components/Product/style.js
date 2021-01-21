@@ -14,12 +14,15 @@ export const ProductName = styled.h3`
    margin: 0 0 10px 0;
 `
 
-export const ProductPrice = styled.h3`
+export const ProductPrice = styled.p`
    font-weight: 700;
    font-size: ${fontSizeMiddle};
    margin: 0 0 10px 0;
 `
 
-export const ProductDescription = styled.h3`
+export const ProductDescription = styled.p`
+   display: block;
    font-size: ${fontSizeContent};
+   word-wrap: break-word;
+   width: 300px;
 `

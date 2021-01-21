@@ -22,20 +22,20 @@ export const FormLoginContainer = () => {
    }
 
    const validateForm = () => {
-      let email;
-      let password;
+      let email
+      let password
 
       if (Object.keys(form.username).length > 0) {
-         email = true;
-         setUsernameValidate(false);
+         email = true
+         setUsernameValidate(false)
       } else {
-         setUsernameValidate(true);
+         setUsernameValidate(true)
       }
       if (Object.keys(form.password).length > 0) {
-         password = true;
-         setPasswordValidate(false);
+         password = true
+         setPasswordValidate(false)
       } else {
-         setPasswordValidate(true);
+         setPasswordValidate(true)
       }
       if (email && password) {
          return true
