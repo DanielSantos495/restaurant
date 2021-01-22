@@ -1,27 +1,26 @@
 import React, { useState, useContext } from 'react'
-
-import { FormAddProduct } from './FormAddProduct'
+import { useRouter } from 'next/router'
 
 import { Context } from '../../Context'
 
-export const FormAddProductContainer = (props) => {
+import { ProductEdit } from './ProductEdit'
 
-   const { typeProductSelection } = props
+export const ProductEditContainer = () => {
+
+   const { productForEdit, setEdit, activeEdit, setProductChange } = useContext(Context)
    const [form, setForm] = useState({
-      name: '',
-      description: '',
-      price: '',
+      name: productForEdit.name,
+      description: productForEdit.description,
+      price: productForEdit.price,
       status: true
    })
-   const windowNotUndefined = (typeof window !== 'undefined')
    const [loader, setLoader] = useState(false)
    const [nameValidate, setNameValidate] = useState(false)
    const [priceValidate, setPriceValidate] = useState(false)
    const [descriptionValidate, setDescriptionValidate] = useState(false)
-   const [typeProductSelectionValidate, setTypeProductSelectionValidate] = useState(false)
-   const [createProuct, setCreatedProduct] = useState(false)
-   const { choiseType } = useContext(Context)
-   const token = windowNotUndefined && window.sessionStorage.getItem('token')
+   const [updateProduct, setUpdateProduct] = useState(false)
+   const token = (typeof window !== 'undefined') && window.sessionStorage.getItem('token')
+   const router = useRouter()
 
    const handleInput = e => {
       setForm({
@@ -30,15 +29,10 @@ export const FormAddProductContainer = (props) => {
       })
    }
 
-   const formWithType = () => {
-      form.type = typeProductSelection.toLowerCase()
-   }
-
    const validateForm = () => {
       let name
       let price
       let description
-      let type
 
       if (Object.keys(form.name).length > 0) {
          name = true
@@ -58,30 +52,21 @@ export const FormAddProductContainer = (props) => {
       } else {
          setDescriptionValidate(true)
       }
-      if (Object.keys(form.type).length > 0) {
-         type = true
-         setTypeProductSelectionValidate(false)
-         choiseType(false)
-      } else {
-         setTypeProductSelectionValidate(true)
-         choiseType(true)
-      }
-      if (name && price && description && type) {
+      if (name && price && description) {
          return true
       }
    }
 
    const handleSubmit = e => {
-      // Agregamos el type a form para la creación del producto
       e.preventDefault()
-      formWithType()
+
       if(validateForm()) {
-         const postData = async () => {
+         const putData = async () => {
             setLoader(true)
-            setCreatedProduct(false)
+            setUpdateProduct(false)
             try {
-               const response = await fetch('http://localhost:3001/api/products', {
-                  method: 'POST',
+               const response = await fetch(`http://localhost:3001/api/products/${productForEdit._id}`, {
+                  method: 'PUT',
                   headers: {
                      'Accept': 'application/json',
                      'Content-Type': 'application/json',
@@ -89,29 +74,41 @@ export const FormAddProductContainer = (props) => {
                   },
                   body: JSON.stringify(form)
                })
+               if (response.status === 500) {
+                  router.push('login')
+               }
                const { data, message } = await response.json()
-               if (data && message === 'Product created') {
+               if (data && message === 'Product update') {
                   setLoader(false)
-                  setCreatedProduct(true)
+                  setUpdateProduct(true)
+
+                  // Se actualiza el componente CardAdmin
+                  setProductChange()
+
+                  // Esperamo 1 seg para cerra el modal despues de editar exitosamente
+                  const id = setTimeout(() => {
+                     setEdit(false)
+                  }, 1000)
+
+                  // Si el usuario lo cierra antes limpiamos el timeout
+                  if (!activeEdit) clearTimeout(id)
                }
             } catch(err) {
                console.error(err)
             }
          }
-         postData()
+         putData()
       }
    }
 
    return(
-      <FormAddProduct
+      <ProductEdit
          form={form}
          loader={loader}
          nameValidate={nameValidate}
          priceValidate={priceValidate}
          descriptionValidate={descriptionValidate}
-         typeProductSelectionValidate={typeProductSelectionValidate}
-         typeProductSelection={typeProductSelection}
-         createProuct={createProuct}
+         updateProduct={updateProduct}
          handleInput={handleInput}
          handleSubmit={handleSubmit}
       />

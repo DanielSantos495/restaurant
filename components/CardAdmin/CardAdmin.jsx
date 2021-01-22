@@ -3,9 +3,10 @@ import React, { useContext } from 'react'
 import { Product } from '@/components/Product/Product'
 import { Manage } from '@/components/Manage/Manage'
 import { ConfirmationDelete } from './ConfirmationDelete'
+import { ProductEditContainer } from '../Product/ProductEditContainer'
 
 import { Context } from '../../Context'
-import { Section, Article, BebidasContainer, ContainerTitle, ButtonIcon  } from './style'
+import { Section, Article, BebidasContainer, ContainerTitle, ButtonIcon } from './style'
 
 export const CardAdmin = (props) => {
 
@@ -18,7 +19,7 @@ export const CardAdmin = (props) => {
    } = props;
    const iconEdit = '/icons/edit.png'
    const iconDelete = '/icons/delete.png'
-   const { manageAction } = useContext(Context)
+   const { manageAction, activeEdit } = useContext(Context)
    const editProduct = manageAction === 'EDITAR'
    const deleteProduct = manageAction === 'ELIMINAR'
 
@@ -34,7 +35,7 @@ export const CardAdmin = (props) => {
                      item.type === 'sushi' &&
                      <li key={i}>
                      {editProduct || deleteProduct ?
-                        <ButtonIcon type='button' onClick={e => handleButtonIcon(item._id)}>
+                        <ButtonIcon type='button' onClick={() => handleButtonIcon(item._id, i, products)}>
                            <img
                               src={editProduct && iconEdit || deleteProduct && iconDelete}
                               alt={editProduct && 'Editar' || deleteProduct && 'Eliminar'}
@@ -42,7 +43,7 @@ export const CardAdmin = (props) => {
                         </ButtonIcon>
                         : null
                      }
-                        <Product {...item}/>
+                        <Product activeEdit={activeEdit} {...item}/>
                      </li>
                   )
                }
@@ -59,12 +60,12 @@ export const CardAdmin = (props) => {
                         item.type === 'bebidas' &&
                         <li key={i}>
                         {editProduct || deleteProduct ?
-                           <ButtonIcon type='button' onClick={e => handleButtonIcon(item._id)}>
+                           <ButtonIcon type='button' onClick={() => handleButtonIcon(item._id, i, products)}>
                               <img src={editProduct && iconEdit || deleteProduct && iconDelete} />
                            </ButtonIcon>
                            : null
                         }
-                           <Product {...item}/>
+                           <Product activeEdit={activeEdit} {...item}/>
                         </li>
                      )
                   }
@@ -80,12 +81,12 @@ export const CardAdmin = (props) => {
                         item.type === 'postres' &&
                         <li key={i}>
                         {editProduct || deleteProduct ?
-                           <ButtonIcon type='button' onClick={e => handleButtonIcon(item._id)}>
+                           <ButtonIcon type='button' onClick={() => handleButtonIcon(item._id, i, products)}>
                               <img src={editProduct && iconEdit || deleteProduct && iconDelete} />
                            </ButtonIcon>
                            : null
                         }
-                           <Product {...item}/>
+                           <Product activeEdit={activeEdit} {...item}/>
                         </li>
                      )
                   }
@@ -93,6 +94,10 @@ export const CardAdmin = (props) => {
             </div>
          </Article>
          <Manage />
+         {/* Modal para editar un producto */}
+         {activeEdit && <ProductEditContainer />}
+
+         {/* Modal para eliminar un producto */}
          {confirmationDelete &&
             <ConfirmationDelete
                setConfirmationDelete={setConfirmationDelete}

@@ -11,6 +11,11 @@ const Provider = ({ children }) => {
    })
    const [typeProductSelectionValidate, setTypeProductSelectionValidate] = useState(false)
    const [manageAction, setAction] = useState('')
+   const [activeEdit, setActiveEdit] = useState(false)
+   const [productForEdit, setProduct] = useState('')
+   const [productChange, setChange] = useState(false)
+
+
 
    // Value del Provider
    const value = {
@@ -19,6 +24,10 @@ const Provider = ({ children }) => {
          setIsAuth(true)
          windowNotUndefined && window.sessionStorage.setItem('token', token)
       },
+      removeAuth: () => {
+         setIsAuth(false)
+         windowNotUndefined && window.sessionStorage.removeItem('token')
+      },
       typeProductSelectionValidate,
       choiseType: choise => {
          setTypeProductSelectionValidate(choise)
@@ -26,6 +35,19 @@ const Provider = ({ children }) => {
       manageAction,
       setManageAction: action => {
          setAction(action)
+      },
+      // CRUD producto
+      activeEdit,
+      setEdit: active => {
+         setActiveEdit(active)
+      },
+      productForEdit,
+      setProductForEdit: product =>{
+         setProduct(product)
+      },
+      productChange,
+      setProductChange: () => {
+         setChange(productChange ? false : true)
       }
    }
 

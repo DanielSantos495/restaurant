@@ -20,3 +20,7 @@ export const Button = styled.button`
    ${buttons(fontSizeMiddle, '40px', '160px' )};
    margin: 0 0 15px 0;
 `
+
+export const LogOut = styled.div`
+   margin:  0 0 40px 0;
+`

@@ -9,17 +9,22 @@ export const CardAdminContainer = () => {
    const [products, setProducts] = useState([])
    const [confirmationDelete, setConfirmationDelete] = useState(false)
    const [productId, setProductId] = useState('')
-   const [deleted, setDeleted] = useState(false);
-   const { manageAction } = useContext(Context)
+   const { manageAction, setEdit, setProductForEdit, setProductChange, productChange } = useContext(Context)
    const token = (typeof window !== 'undefined') && window.sessionStorage.getItem('token')
    const router = useRouter()
 
-   const handleButtonIcon = id => {
+   const handleButtonIcon = (id, i, products) => {
       if (manageAction === 'ELIMINAR') {
          setProductId(id)
          setConfirmationDelete(true)
+         setEdit(false)
       } else if (manageAction === 'EDITAR') {
-         // EDITAMOS
+         setProductForEdit(products[i])
+         setConfirmationDelete(false)
+         setEdit(true)
+      } else if (manageAction === 'AGREGAR') {
+         setConfirmationDelete(false)
+         setEdit(false)
       }
    }
 
@@ -35,7 +40,7 @@ export const CardAdminContainer = () => {
       }
 
       getProducts()
-   }, [deleted])
+   }, [productChange])
 
    const handleSubmitDelete = e => {
       e.preventDefault()
@@ -57,8 +62,8 @@ export const CardAdminContainer = () => {
 
             if (data && message === 'Product delete') {
                setConfirmationDelete(false)
-               // Recargar el componente cada vez que se elimna un producto
-               setDeleted(deleted ? false : true)
+               // Se actualiza el componente CardAdmin
+               setProductChange()
                // Se eliminó existosamente
             }
          } catch(err) {

@@ -28,6 +28,7 @@ export const FormAddProduct = (props) => {
       handleInput,
       handleSubmit
    } = props
+   const successIcon = '/icons/checked.png'
 
    return(
       <Section>
@@ -89,7 +90,7 @@ export const FormAddProduct = (props) => {
                />
             </ProductContainer>
          </TemplateAddProduct>
-         {createProuct && <Success src='/icons/checked.png' />}
+         {createProuct && <Success src={successIcon} />}
       </Section>
    )
 }

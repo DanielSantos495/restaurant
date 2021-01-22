@@ -7,7 +7,7 @@ export const Product = (props) => {
    const {
       name,
       price,
-      description
+      description,
    } = props;
    return (
       <Container>

@@ -10,7 +10,6 @@ export const CardUserContainer = () => {
          try {
             const response = await fetch('http://localhost:3001/api/products')
             const data = await response.json()
-            console.log(data.data);
             setProducts(data.data)
          } catch(err) {
             console.error(err)

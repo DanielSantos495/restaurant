@@ -30,7 +30,7 @@ export const buttons = (fontsize, height, width, background = colorPrimary) => `
 export const titles = (height, width) => `
    align-items: center;
    background: ${colorPrimary};
-   border-radius: 5px;
+   border-radius: 2px;
    display: flex;
    height: ${height};
    justify-content: center;

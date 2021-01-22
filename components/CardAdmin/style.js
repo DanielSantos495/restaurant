@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { fontFamiliyContent, fontFamilyCursive, fontSizeBig, fontSizeMiddle, fontSizeTitle } from 'styles/variables'
-import { productsCenter, titles, buttons } from '../../styles/mixins'
+import { fontFamiliyContent ,fontSizeMiddle, fontSizeTitle } from 'styles/variables'
+import { productsCenter, titles, buttons, input } from '../../styles/mixins'
 
 
 
@@ -38,8 +38,11 @@ export const ButtonIcon = styled.button`
    ${buttons(fontSizeMiddle, '30px', '30px', 'none')}
 `
 
-// Modal
+export const Input = styled.input`
+   ${input('200px')}
+`
 
+// Modal Delete
 export const ModalOverlay = styled.div`
    background-color: rgba(0, 0, 0, .5);
    bottom: 0;

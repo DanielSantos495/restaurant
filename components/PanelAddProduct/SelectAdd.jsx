@@ -3,8 +3,9 @@ import { useRouter } from 'next/router'
 
 import { Context } from '../../Context'
 
-import { Alert } from '@/styles/mixins'
+import { LogOut } from '@/components/LogOut/LogOut'
 
+import { Alert } from '@/styles/mixins'
 import { Button, ButtonBack, PanelTypes } from './style'
 
 export const SelectAdd = (props) => {
@@ -21,6 +22,7 @@ export const SelectAdd = (props) => {
 
    return(
       <section>
+         <LogOut />
          <ButtonBack type='button' onClick={handleButton}> ATRAS </ButtonBack>
          <PanelTypes>
             <Button type='button' onClick={handleButtonType}>

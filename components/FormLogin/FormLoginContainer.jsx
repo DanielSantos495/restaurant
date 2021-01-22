@@ -60,7 +60,6 @@ export const FormLoginContainer = () => {
                      'Authorization': `Basic ${dataLogin}`
                   }
                })
-               console.log(response)
                const { data, message } = await response.json()
                setLoader(false)
                if (response.status === 500) {
