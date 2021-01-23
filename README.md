@@ -23,7 +23,7 @@ Backend:
    - JWT
    - Mongo
 
-[Repostitorio]('https://github.com/DanielSantos495/restauranta-api')
+[Repostitorio](https://github.com/DanielSantos495/restauranta-api)
 
 ## Licencia
    Restaurant se lanza bajo la licencia [MIT](https://opensource.org/licenses/MIT).
