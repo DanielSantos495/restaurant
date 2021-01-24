@@ -1,8 +1,19 @@
 import React from 'react'
 
 import { Product } from '@/components/Product/Product'
-import { Section, Form, TemplateAddProduct, H2, Input, Button, ProductContainer, ContainerTitleType } from './style'
-import { Alert } from '@/styles/mixins'
+import { Loader, Alert } from '@/styles/mixins'
+import {
+   Section,
+   Form,
+   TemplateAddProduct,
+   H2,
+   Input,
+   InputNumber,
+   Button,
+   ProductContainer,
+   ContainerTitleType,
+   Success,
+} from './style'
 
 export const FormAddProduct = (props) => {
 
@@ -13,10 +24,11 @@ export const FormAddProduct = (props) => {
       priceValidate,
       descriptionValidate,
       typeProductSelection,
+      createProuct,
       handleInput,
       handleSubmit
    } = props
-   console.log(typeProductSelection);
+
    return(
       <Section>
          <TemplateAddProduct>
@@ -35,8 +47,9 @@ export const FormAddProduct = (props) => {
                      <Alert>Se te olvido el nombre</Alert>}
                </label>
                <label htmlFor='price'>
-                  <Input
-                     type='text'
+                  <InputNumber
+                     type='number'
+                     min='0'
                      value={form.price}
                      name='price'
                      placeholder='Precio'
@@ -60,6 +73,7 @@ export const FormAddProduct = (props) => {
                </label>
                {loader && <Loader>Cargando...</Loader>}
                <Button type='submit' disabled={loader}>Crear</Button>
+
             </Form>
             <ProductContainer>
             {
@@ -75,6 +89,7 @@ export const FormAddProduct = (props) => {
                />
             </ProductContainer>
          </TemplateAddProduct>
+         {createProuct && <Success src='/icons/checked.png' />}
       </Section>
    )
 }

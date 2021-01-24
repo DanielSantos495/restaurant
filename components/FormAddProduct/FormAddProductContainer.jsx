@@ -6,27 +6,32 @@ import { Context } from '../../Context'
 
 export const FormAddProductContainer = (props) => {
 
-   const {
-      typeProductSelection
-   } = props
+   const { typeProductSelection } = props
    const [form, setForm] = useState({
       name: '',
-      price: '',
       description: '',
-      type: typeProductSelection
+      price: '',
+      status: true
    })
+   const windowNotUndefined = (typeof window !== 'undefined')
    const [loader, setLoader] = useState(false)
    const [nameValidate, setNameValidate] = useState(false)
    const [priceValidate, setPriceValidate] = useState(false)
    const [descriptionValidate, setDescriptionValidate] = useState(false)
    const [typeProductSelectionValidate, setTypeProductSelectionValidate] = useState(false)
+   const [createProuct, setCreatedProduct] = useState(false)
    const { choiseType } = useContext(Context)
+   const token = windowNotUndefined && window.sessionStorage.getItem('token')
 
    const handleInput = e => {
       setForm({
          ...form,
          [e.target.name]: e.target.value
       })
+   }
+
+   const formWithType = () => {
+      form.type = typeProductSelection.toLowerCase()
    }
 
    const validateForm = () => {
@@ -65,31 +70,36 @@ export const FormAddProductContainer = (props) => {
          return true
       }
    }
-   // console.log(validateForm())
+   console.log(form, 'form')
    const handleSubmit = e => {
+      // Agregamos el type a form para la creación del producto
       e.preventDefault()
-
+      formWithType()
       if(validateForm()) {
          const postData = async () => {
+            console.log('dentro de post data')
             setLoader(true)
+            setCreatedProduct(false)
             try {
-               const response = await fetch('', {
+               const response = await fetch('http://localhost:3001/api/products', {
                   method: 'POST',
                   headers: {
                      'Accept': 'application/json',
                      'Content-Type': 'application/json',
                      'Authorization': `Bearer ${token}`
-                  }
+                  },
+                  body: JSON.stringify(form)
                })
-               console.log(response)
-               const data = await response.json()
-               setLoader(false)
-               console.log(data)
+               const { data, message } = await response.json()
+               if (message === 'Product created') {
+                  setLoader(false)
+                  setCreatedProduct(true)
+               }
             } catch(err) {
                console.error(err)
             }
-            postData()
          }
+         postData()
       }
    }
 
@@ -102,6 +112,7 @@ export const FormAddProductContainer = (props) => {
          descriptionValidate={descriptionValidate}
          typeProductSelectionValidate={typeProductSelectionValidate}
          typeProductSelection={typeProductSelection}
+         createProuct={createProuct}
          handleInput={handleInput}
          handleSubmit={handleSubmit}
       />

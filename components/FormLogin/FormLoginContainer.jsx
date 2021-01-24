@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { useRouter } from 'next/router'
 import btoa from 'btoa'
 
 import { FormLogin } from './FormLogin'
+import { Context } from '../../Context'
 
 export const FormLoginContainer = () => {
 
@@ -12,6 +14,8 @@ export const FormLoginContainer = () => {
    const [loader, setLoader] = useState(false)
    const [usernameValidate, setUsernameValidate] = useState(false)
    const [passwordValidate, setPasswordValidate] = useState(false)
+   const { activeAuth } = useContext(Context)
+   const router = useRouter()
    const dataLogin = btoa(`${form.username}:${form.password}`);
 
    const handleInput = e => {
@@ -44,7 +48,6 @@ export const FormLoginContainer = () => {
 
    const handleSubmit = e => {
       e.preventDefault()
-
       if(validateForm()) {
          const postData = async () => {
             try {
@@ -58,14 +61,16 @@ export const FormLoginContainer = () => {
                   }
                })
                console.log(response)
-               const data = await response.json()
+               const { data, message } = await response.json()
                setLoader(false)
                if (response.status === 500) {
                   setLoader(false)
-                  console.log('resvisar credenciales pdte')
+                  console.log('resvisar credenciales pdte loader')
+               } else if (response.status === 201 && message === 'User logged in') {
+                  setLoader(false)
+                  activeAuth(data)
+                  router.push('/admin/manage')
                }
-               setLoader(false)
-               console.log(data, 'response login')
 
             } catch(err) {
                console.error(err)

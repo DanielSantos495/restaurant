@@ -2,6 +2,9 @@ import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
 
 import { Context } from '../../Context'
+
+import { Alert } from '@/styles/mixins'
+
 import { Button, ButtonBack, PanelTypes } from './style'
 
 export const SelectAdd = (props) => {
