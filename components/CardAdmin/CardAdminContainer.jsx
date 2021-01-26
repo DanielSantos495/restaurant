@@ -4,9 +4,9 @@ import { Context } from '../../Context'
 
 import { CardAdmin } from './CardAdmin'
 
-export const CardAdminContainer = () => {
+export const CardAdminContainer = (props) => {
 
-   const [products, setProducts] = useState([])
+   const { products } = props
    const [confirmationDelete, setConfirmationDelete] = useState(false)
    const [productId, setProductId] = useState('')
    const { manageAction, setEdit, setProductForEdit, setProductChange, productChange } = useContext(Context)
@@ -29,20 +29,6 @@ export const CardAdminContainer = () => {
       }
    }
 
-   useEffect(() => {
-      const getProducts = async () => {
-         try {
-            const response = await fetch(`${API}/api/products`)
-            const data = await response.json()
-            setProducts(data.data)
-         } catch(err) {
-            console.error(err)
-         }
-      }
-
-      getProducts()
-   }, [productChange])
-
    const handleSubmitDelete = e => {
       e.preventDefault()
 
@@ -54,19 +40,16 @@ export const CardAdminContainer = () => {
                   'Authorization': `Bearer ${token}`
                }
             })
-            console.log(response)
-            if(response.status === 401 && response.statusText === 'Unauthorized') {
+            if(response.status === 401 || response.statusText === 'Unauthorized') {
                // No esta logeado
                router.push('login')
             }
 
             const { data, message} = await response.json()
-            console.log(data, message)
             if (data && message === 'Product delete') {
-               setConfirmationDelete(false)
                // Se actualiza el componente CardAdmin
                setProductChange()
-               // Se eliminó existosamente
+               setConfirmationDelete(false)
             }
          } catch(err) {
             console.error(err)

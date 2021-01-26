@@ -12,7 +12,6 @@ export const Header = (props) => {
          <DecorationPoint />
          <H1>
             <Img src={logo}/>
-            {/* // <Image src='https://i.imgur.com/QVzPw2n.png' alt='Logo'/> */}
          </H1>
       </HeaderTag>
    )

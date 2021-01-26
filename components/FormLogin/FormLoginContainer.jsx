@@ -65,8 +65,8 @@ export const FormLoginContainer = () => {
                setLoader(false)
                if (response.status === 500) {
                   setLoader(false)
-                  console.log('resvisar credenciales pdte loader')
-               } else if (response.status === 201 && message === 'User logged in') {
+                  // resvisar credenciales pdte loader
+               } else if (response.status === 201 || message === 'User logged in') {
                   setLoader(false)
                   activeAuth(data)
                   router.push('/admin/manage')

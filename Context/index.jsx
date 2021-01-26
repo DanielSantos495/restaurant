@@ -13,7 +13,7 @@ const Provider = ({ children }) => {
    const [manageAction, setAction] = useState('')
    const [activeEdit, setActiveEdit] = useState(false)
    const [productForEdit, setProduct] = useState('')
-   const [productChange, setChange] = useState(false)
+   const [productChange, setChange] = useState(1)
 
 
 
@@ -47,7 +47,7 @@ const Provider = ({ children }) => {
       },
       productChange,
       setProductChange: () => {
-         setChange(productChange ? false : true)
+         setChange(productChange ? 0 : 1)
       }
    }
 

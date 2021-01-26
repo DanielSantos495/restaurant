@@ -15,7 +15,7 @@ export const CardUser = (props) => {
             </ContainerTitle>
             <ul>
                {
-                  products.map((item, i) =>
+                  products?.map((item, i) =>
                      item.type === 'sushi' &&
                      <li key={i}>
                         <Product {...item}/>
@@ -31,7 +31,7 @@ export const CardUser = (props) => {
             </ContainerTitle>
                <ul>
                   {
-                     products.map((item, i) =>
+                     products?.map((item, i) =>
                         item.type === 'bebidas' &&
                         <li key={i}>
                            <Product {...item}/>
@@ -46,7 +46,7 @@ export const CardUser = (props) => {
                </ContainerTitle>
                <ul>
                   {
-                     products.map((item, i) =>
+                     products?.map((item, i) =>
                         item.type === 'postres' &&
                         <li key={i}>
                            <Product {...item}/>
