@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { useRouter } from 'next/router'
 
 import { FormAddProduct } from './FormAddProduct'
 
@@ -22,6 +23,8 @@ export const FormAddProductContainer = (props) => {
    const [createProuct, setCreatedProduct] = useState(false)
    const { choiseType } = useContext(Context)
    const token = windowNotUndefined && window.sessionStorage.getItem('token')
+   const router = useRouter()
+   const API = 'https://restaurant.danielsantos495.vercel.app'
 
    const handleInput = e => {
       setForm({
@@ -80,7 +83,7 @@ export const FormAddProductContainer = (props) => {
             setLoader(true)
             setCreatedProduct(false)
             try {
-               const response = await fetch('http://localhost:3001/api/products', {
+               const response = await fetch(`${API}/api/products`, {
                   method: 'POST',
                   headers: {
                      'Accept': 'application/json',
@@ -89,6 +92,11 @@ export const FormAddProductContainer = (props) => {
                   },
                   body: JSON.stringify(form)
                })
+               if (response.status === 500) {
+                  // Verificar API, porque no esta dando el 401
+                  router.push('/admin/login')
+                  setLoader(false)
+               }
                const { data, message } = await response.json()
                if (data && message === 'Product created') {
                   setLoader(false)

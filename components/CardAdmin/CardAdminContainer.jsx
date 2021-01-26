@@ -12,6 +12,7 @@ export const CardAdminContainer = () => {
    const { manageAction, setEdit, setProductForEdit, setProductChange, productChange } = useContext(Context)
    const token = (typeof window !== 'undefined') && window.sessionStorage.getItem('token')
    const router = useRouter()
+   const API = 'https://restaurant.danielsantos495.vercel.app'
 
    const handleButtonIcon = (id, i, products) => {
       if (manageAction === 'ELIMINAR') {
@@ -31,7 +32,7 @@ export const CardAdminContainer = () => {
    useEffect(() => {
       const getProducts = async () => {
          try {
-            const response = await fetch('http://localhost:3001/api/products')
+            const response = await fetch(`${API}/api/products`)
             const data = await response.json()
             setProducts(data.data)
          } catch(err) {
@@ -47,19 +48,20 @@ export const CardAdminContainer = () => {
 
       const postDelete = async () => {
          try {
-            const response = await fetch(`http://localhost:3001/api/products/${productId}`, {
+            const response = await fetch(`${API}/api/products/${productId}`, {
                method: 'DELETE',
-               headers:{
+               headers: {
                   'Authorization': `Bearer ${token}`
                }
             })
+            console.log(response)
             if(response.status === 401 && response.statusText === 'Unauthorized') {
                // No esta logeado
                router.push('login')
             }
 
             const { data, message} = await response.json()
-
+            console.log(data, message)
             if (data && message === 'Product delete') {
                setConfirmationDelete(false)
                // Se actualiza el componente CardAdmin

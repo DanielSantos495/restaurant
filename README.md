@@ -4,26 +4,26 @@
    - Tiene dominio: www.ejemplomenu.com/admin/login:
       - Nos permite agregar, editar y eliminar productos del menú
       - Hay una cuenta administrador:
-      Nombre de usuario: Admin
-      Contraseña: 123456
+         -Nombre de usuario: Admin
+         - Contraseña: 123456
 
       Puedes entrar y probar
 
 ## Tecnologías
 
-Frontend:
-   - NextJs
-   - ReactJs
-   - Babel
-   - Styled Components
+   Frontend:
+      - NextJs
+      - ReactJs
+      - Babel
+      - Styled Components
 
-Backend:
-   - NodeJs
-   - Express
-   - JWT
-   - Mongo
+   Backend:
+      - NodeJs
+      - Express
+      - JWT
+      - Mongo
 
-[Repostitorio](https://github.com/DanielSantos495/restauranta-api)
+   Repositorio: [Restaurant API](https://github.com/DanielSantos495/restauranta-api)
 
 ## Licencia
    Restaurant se lanza bajo la licencia [MIT](https://opensource.org/licenses/MIT).

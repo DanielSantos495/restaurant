@@ -4,11 +4,12 @@ import { CardUser } from './CardUser'
 
 export const CardUserContainer = () => {
    const [products, setProducts] = useState([])
+   const API = 'https://restaurant.danielsantos495.vercel.app'
 
    useEffect(() => {
       const getProducts = async () => {
          try {
-            const response = await fetch('http://localhost:3001/api/products')
+            const response = await fetch(`${API}/api/products`)
             const data = await response.json()
             setProducts(data.data)
          } catch(err) {

@@ -21,6 +21,7 @@ export const ProductEditContainer = () => {
    const [updateProduct, setUpdateProduct] = useState(false)
    const token = (typeof window !== 'undefined') && window.sessionStorage.getItem('token')
    const router = useRouter()
+   const API = 'https://restaurant.danielsantos495.vercel.app'
 
    const handleInput = e => {
       setForm({
@@ -65,7 +66,7 @@ export const ProductEditContainer = () => {
             setLoader(true)
             setUpdateProduct(false)
             try {
-               const response = await fetch(`http://localhost:3001/api/products/${productForEdit._id}`, {
+               const response = await fetch(`${API}/api/products/${productForEdit._id}`, {
                   method: 'PUT',
                   headers: {
                      'Accept': 'application/json',

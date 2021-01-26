@@ -16,7 +16,8 @@ export const FormLoginContainer = () => {
    const [passwordValidate, setPasswordValidate] = useState(false)
    const { activeAuth } = useContext(Context)
    const router = useRouter()
-   const dataLogin = btoa(`${form.username}:${form.password}`);
+   const API = 'https://restaurant.danielsantos495.vercel.app'
+   const dataLogin = btoa(`${form.username}:${form.password}`)
 
    const handleInput = e => {
       setForm({
@@ -52,7 +53,7 @@ export const FormLoginContainer = () => {
          const postData = async () => {
             try {
                setLoader(true)
-               const response = await fetch('http://localhost:3001/api/auth/login', {
+               const response = await fetch(`${API}/api/auth/login`, {
                   method: 'POST',
                   headers: {
                      'Accept': 'application/json',
